@@ -1,0 +1,13 @@
+// set bulma variables to brand colors
+$blue: rgb(30,73,113);
+$light-blue: rgb(70,127,179);
+
+$primary: $blue;
+$info: $light-blue;
+
+$text: white;
+
+$navbar-item-color: #ffffff;
+
+//Bulma import
+@import "~bulma";
