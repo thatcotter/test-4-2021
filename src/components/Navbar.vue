@@ -13,26 +13,48 @@ export default Vue.extend({
 			'toggleMenu',
 			'toggleSubMenu'
 		])
+	},
+	computed: {
+		storeChecked: {
+			get() {
+				return this.$store.state.menuActive
+			},
+			set(value) {
+				this.$store.commit('setMenu', value)
+			}
+		}
 	}
 })
 </script>
 
 <template>
 	<nav class="navbar">
-		<ul>
-			<li class="alaska title has-text-white">ALASKA</li>
-			<li class="toggle" @click="toggleMenu">
-				<input class="" type="checkbox" id="check" v-model="checked"/>
-				<label class="" for="check">
-				<i @click="toggleMenu" class="fas fa-bars" id="btn"></i>
-				<i @click="toggleMenu" class="fas fa-times" id="cancel"></i>
-				</label>
-			</li>
-		</ul>		
+		<div class="navbar-brand">
+			<router-link to="/" class="navbar-item alaska title has-text-white">ALASKA</router-link>
+		</div>
+		<div class="navbar-menu is-active">
+			<!-- <div class="navbar-start is-active">
+				<a class="navbar-item alaska title has-text-white">ALASKA</a>
+			</div> -->
+			<div class="navbar-end is-active">
+				<div class="navbar-item is-active toggle" @click="toggleMenu">
+					<input class="" type="checkbox" id="check" v-model="storeChecked"/>
+					<label class="" for="check">
+					<i @click="toggleMenu" class="fas fa-bars" id="btn"></i>
+					<i @click="toggleMenu" class="fas fa-times" id="cancel"></i>
+					</label>
+				</div>
+			</div>
+		</div>
 	</nav>
 </template>
 
 <style lang="scss" scoped>
+
+.navbar-menu{
+	background-color: rgb(30, 70, 113);
+}
+
 nav {
 	background-color: rgb(30, 70, 113);
 	// width: 100vw;
@@ -41,7 +63,7 @@ nav {
 ul{
 	width: 100%;
 	list-style-type: none;
-	position: fixed;
+	// position: fixed;
 	margin: 0;
 	padding: 0;
 }
@@ -57,9 +79,16 @@ li {
 }
 
 .toggle {
-	padding: 10px 40px;
-	float: right;
+	padding: 10px 50px;
+	// background: salmon;
+	// float: right;
 }
+
+// @media screen and (max-width: 720px) {
+//   .toggle {
+//     // padding: auto;
+//   }
+// }
 
 // @media screen and (max-width: 720px) {
 //   .toggle {
@@ -75,12 +104,14 @@ label {
 
 	#btn {
 		position: absolute;
+		// margin-top: -10px;
 		font-size: 30px;
 		color: white;
 		transition: all 0.5s;
 	}
 	#cancel {
 		position: absolute;
+		// margin-top: -10px;
 		z-index: 1111;
 		font-size: 30px;
 		opacity: 0;

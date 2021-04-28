@@ -1,8 +1,13 @@
 <template>
 	<div class="breadcrumb has-succeeds-separator">
-		<ol v-bind:class="{invisible: isActive}">
-			<li>Section</li>
-			<li class="is-active">Page Title</li>
+		<ol v-bind:class="{invisible: isActive}" v-if="$route.params.id != undefined">
+			<li>{{$route.params.domain.split('_').join(' ')}}</li>
+			<li class="is-active">{{$route.params.id.split('_').join(' ')}}</li>
+		</ol>
+		<ol v-bind:class="{invisible: isActive}" v-else>
+			<li>{{$route.params.domain.split('_').join(' ')}}</li>
+			<li>{{$route.params.domain.split('_').join(' ')}}</li>
+			<!-- <li class="is-active">{{$route.params.id}}</li> -->
 		</ol>
 	</div>
 </template>
@@ -21,8 +26,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 
-
-
 div{
 	background-color: rgb(70, 127, 179);
 	// background: salmon;
@@ -37,10 +40,6 @@ ol {
 
 li {
 	z-index: 0;
-}
-
-.invisible {
-	opacity: 0;
 }
 
 </style>
